@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Selected C++ Idioms — Part 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style>
+         @import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i&display=swap');
+         @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+         @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+         @import url('https://fonts.googleapis.com/css?family=Gabriela&display=swap');
+
+         body {
+             font-family: 'EB Garamond';
+             word-spacing: 0.5mm;
+         }
+         h1, h2, h3 {
+             font-family: 'Yanone Kaffeesatz';
+             font-weight: 400;
+             margin-top: 4mm;
+             margin-bottom: 0;
+         }
+         h1 strong, h2 strong, h3 strong {
+             color: #009500;
+             letter-spacing: .75mm;
+         }
+         .remark-slide-content h1 { font-size: 3em; }
+         .remark-slide-content h2 { font-size: 2em; }
+         .remark-slide-content h3 { font-size: 1.6em; }
+
+         .footnote:first-child {
+             border-top: 1px dashed rgba(0, 0, 0, 0.2);
+         }
+
+         .footnote {
+             font-size: 0.3cm;
+             display: block;
+         }
+         .inverse .footnote {
+             color: #0f0;
+         }
+         .footnote .red {
+             color: #fa0000;
+             font-size: 0.6cm;
+             vertical-align: text-top;
+         }
+         .tag {
+             background: #ff9500;
+             color: #fff;
+             border-radius: 5px;
+             padding: 0.5mm 1mm;
+             font-family: 'Ubuntu Mono';
+             font-size: 0.85em;
+         }
+         li p { line-height: 1.25em; }
+         .little { font-size: small; }
+         .little ul { padding-left: 20px; }
+         .red { color: #fa0000; font-size: 0.6em; vertical-align: super; }
+         .large { font-size: 2em; }
+         a, a > code {
+             color: rgb(249, 38, 114);
+             text-decoration: none;
+         }
+         code {
+             word-spacing: normal;
+             background: #e7e8e2;
+             border-radius: 5px;
+         }
+         strong {
+             color: #000;
+         }
+         .remark-code, .remark-inline-code {
+             font-family: 'Ubuntu Mono';
+             background: none;
+             color: #66f;
+             font-size: 0.85em;
+         }
+         .remark-code-line-highlighted     { background-color: #373832; }
+         .remark-code { border-radius: 5px; }
+         .pull-left {
+             float: left;
+             width: 47%;
+         }
+         .pull-right {
+             float: right;
+             width: 47%;
+         }
+         .pull-right ~ p {
+             clear: both;
+         }
+         #slideshow .slide .content code {
+             font-size: 0.8em;
+         }
+         #slideshow .slide .content pre code {
+             font-size: 0.9em;
+             padding: 15px;
+         }
+         .inverse {
+             background: #272822;
+             color: #777872;
+             text-shadow: 0 0 20px #333;
+         }
+         .inverse h1, .inverse h2 {
+             color: #f3f3f3;
+             line-height: 1.2em;
+             letter-spacing: 1mm;
+             word-spacing: 2mm;
+         }
+
+         .inverse strong {
+             color: rgb(249, 38, 114);
+         }
+
+         /* Slide-specific styling */
+         #slide-inverse .footnote {
+             bottom: 12px;
+             left: 20px;
+         }
+         #slide-how .slides {
+             font-size: 0.9em;
+             position: absolute;
+             top:  151px;
+             right: 140px;
+         }
+         #slide-how .slides h3 {
+             margin-top: 0.2em;
+         }
+         #slide-how .slides .first, #slide-how .slides .second {
+             padding: 1px 20px;
+             height: 90px;
+             width: 120px;
+             -moz-box-shadow: 0 0 10px #777;
+             -webkit-box-shadow: 0 0 10px #777;
+             box-shadow: 0 0 10px #777;
+         }
+         #slide-how .slides .first {
+             background: #fff;
+             position: absolute;
+             top: 20%;
+             left: 20%;
+             z-index: 1;
+         }
+         #slide-how .slides .second {
+             position: relative;
+             background: #fff;
+             z-index: 0;
+         }
+
+         /* Two-column layout */
+         .left-column {
+             color: #777;
+             width: 20%;
+             height: 92%;
+             float: left;
+         }
+         .left-column h2:last-of-type, .left-column h3:last-child {
+             color: #000;
+         }
+         .right-column {
+             width: 75%;
+             float: right;
+         }
+         blockquote {
+             font-family: 'Gabriela';
+             position:relative;
+             margin:1em 0;
+             padding: 1mm 2rem;
+             color: #5e5e5e;
+             letter-spacing: 0.75px;
+             border-radius:.2rem;
+             border-left:1.5rem solid rgba(68,138,255,.4);
+             background-color:rgba(68,138,255,.15);
+         }
+         ::selection {
+             background: #FFF200;
+             color: #000;
+             display: block;
+         }
+
+         ::-moz-selection {
+             background: #FFF200;
+             color: #000;
+             display: block;
+         }
+        </style>
+    </head>
+    <body>
+        <script src="remark.min.js" type="text/javascript">
+        </script>
+        <script type="text/javascript">
+         var slideshow = remark.create({
+             sourceUrl: 'content.md',
+             highlightStyle: 'monokai',
+             highlightLines: true,
+             slideNumberFormat: '%current% / %total%'
+         });
+
+         // https://github.com/gnab/remark/issues/72#issuecomment-419693263
+         remark.macros.img = function (tooltip, width) {
+             var url = this;
+             return '<img title="' + tooltip + '" src="' + url + '" style="width: ' + width + '" />';
+         };
+        </script>
+    </body>
+</html>
