@@ -4,7 +4,6 @@ class: center, middle, inverse
 
 ## Part 1
 
-
 ### Sundaram Ramaswamy
 
 ---
@@ -245,7 +244,7 @@ private:                       // protected works too
 Point::Point(float x, float y) : x_(x), y_(y) { }
 
 Point Point::rectangular(float x, float y) {
- return Point(x, y);
+  return Point(x, y);
 }
 
 Point Point::polar(float radius, float angle) {
@@ -260,9 +259,9 @@ int main() {
 }
 ```
 
-* [`std::unique_ptr<DeclarativeConditionSet> extensions::DeclarativeConditionSet`](https://source.chromium.org/chromium/chromium/src/+/master:extensions/browser/api/declarative/declarative_rule.h;l=71)
-* [`base::scoped_refptr<ObjectManager> dbus::ObjectManager`](https://source.chromium.org/chromium/chromium/src/+/master:dbus/object_manager.h;l=187)
-* [`base::scoped_refptr<BasicShapeCircle> blink::BasicShapeCircle::Create`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/core/style/basic_shapes.h;l=136)
+* [`unique_ptr<DeclarativeConditionSet> extensions::DeclarativeConditionSet::Create`](https://source.chromium.org/chromium/chromium/src/+/master:extensions/browser/api/declarative/declarative_rule.h;l=71)
+* [`scoped_refptr<ObjectManager> dbus::ObjectManager::Create`](https://source.chromium.org/chromium/chromium/src/+/master:dbus/object_manager.h;l=187)
+* [`scoped_refptr<BasicShapeCircle> blink::BasicShapeCircle::Create`](https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/core/style/basic_shapes.h;l=136)
 
 ---
 
